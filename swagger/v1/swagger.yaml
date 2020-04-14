@@ -1,0 +1,82 @@
+---
+openapi: 3.0.1
+info:
+  title: API V1
+  version: v1
+paths:
+  "/api/v1/devices":
+    post:
+      summary: Creates a device
+      tags:
+      - Devices
+      parameters: []
+      responses:
+        '201':
+          description: device created
+          content: {}
+        '422':
+          description: invalid request
+          content: {}
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                serial_number:
+                  type: string
+              required:
+              - serial_number
+          application/xml:
+            schema:
+              type: object
+              properties:
+                serial_number:
+                  type: string
+              required:
+              - serial_number
+  "/api/v1/devices/{id}":
+    get:
+      summary: Retrieves a device
+      tags:
+      - Devices
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: name found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  name:
+                    type: string
+                required:
+                - id
+                - serial_number
+            application/xml:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  name:
+                    type: string
+                required:
+                - id
+                - serial_number
+        '404':
+          description: device not found
+          content: {}
+servers:
+- url: http://{defaultHost}
+  variables:
+    defaultHost:
+      default: localhost:3000
