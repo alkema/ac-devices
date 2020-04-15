@@ -24,20 +24,29 @@ RSpec.configure do |config|
       paths: {},
       servers: [
         {
-          url: 'http://{defaultHost}',
+          url: 'https://{defaultHost}',
           variables: {
             defaultHost: {
-              default: ENV['API_HOST']
+              default: 'ac-devices.herokuapp.com'
             }
+          },
+          description: 'Production server (uses live data)'
+        },
+        {
+          host: 'localhost:3000',
+          description: 'Local server (for development)'
+        }
+      ],
+      components: {
+        securitySchemes: {
+          api_key: {
+            type: :apiKey,
+            in: :header,
+            name: 'X-API-KEY'
           }
         }
-      ]
+      }
     }
   }
 
-  # Specify the format of the output Swagger file when running 'rswag:specs:swaggerize'.
-  # The swagger_docs configuration option has the filename including format in
-  # the key, this may want to be changed to avoid putting yaml in json files.
-  # Defaults to json. Accepts ':json' and ':yaml'.
-  config.swagger_format = :yaml
 end
