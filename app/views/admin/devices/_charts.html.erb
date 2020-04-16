@@ -2,7 +2,7 @@
 
   <h2>Temperature</h2>
 
-  <%= area_chart device.device_readings.group_by_hour(:reading_at).average(:temperature) %>
+  <%= area_chart @device_readings.group_by_hour(:reading_at).average(:temperature) %>
 
 </div>
 
@@ -10,7 +10,7 @@
 
   <h2>Humidity</h2>
 
-  <%= area_chart device.device_readings.group_by_hour(:reading_at).average(:humidity) %>
+  <%= area_chart @device_readings.group_by_hour(:reading_at).average(:humidity) %>
 
 </div>
 
@@ -18,6 +18,6 @@
 
   <h2>Carbon Monoxide</h2>
 
-  <%= area_chart device.device_readings.group_by_hour(:reading_at).average(:carbon_monoxide) %>
+  <%= area_chart @device_readings.group_by_hour(:reading_at).average(:carbon_monoxide) %>
 
 </div>
