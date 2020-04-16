@@ -1,5 +1,6 @@
-class Api::V1::DevicesController < ActionController::API
+# frozen_string_literal: true
 
+class Api::V1::DevicesController < ActionController::API
   include Api::Rescuable
   include Api::Authenticatable
 
@@ -7,8 +8,7 @@ class Api::V1::DevicesController < ActionController::API
 
   # GET /api/v1/devices/1
   # GET /api/v1/devices/1.json
-  def show
-  end
+  def show; end
 
   # POST /api/v1/devices
   # POST /api/v1/devices.json
@@ -16,7 +16,7 @@ class Api::V1::DevicesController < ActionController::API
     @device = Device.new(device_params)
 
     if @device.save!
-      render :show, status: :created, location: api_v1_device_url(@device, format: :json)
+      render(:show, status: :created, location: api_v1_device_url(@device, format: :json))
     end
   end
 
@@ -30,5 +30,4 @@ class Api::V1::DevicesController < ActionController::API
   def device_params
     params.fetch(:api_v1_device, {})
   end
-
 end

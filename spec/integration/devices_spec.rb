@@ -1,24 +1,26 @@
+# frozen_string_literal: true
+
 # spec/integration/devices_spec.rb
-require 'swagger_helper'
+require('swagger_helper')
 
 describe 'Devices API' do
-
   path '/api/v1/devices' do
-
     post 'Creates a device' do
       tags 'Devices'
       consumes 'application/json'
-      security [ api_key: [] ]
+      security [api_key: []]
 
-      parameter name: :device, in: :body, schema: {
-        type: :object,
-        properties: {
-          serial_number: { type: :string },
-          firmware_version: { type: :string },
-          registered_on: { type: :string, format: 'date' }
-        },
-        required: [ 'serial_number', 'firmware_version', 'registered_on' ]
-      }
+      parameter name: :device,
+                in: :body,
+                schema: {
+                  type: :object,
+                  properties: {
+                    serial_number: { type: :string },
+                    firmware_version: { type: :string },
+                    registered_on: { type: :string, format: 'date' }
+                  },
+                  required: %w[serial_number firmware_version registered_on]
+                }
 
       response '201', 'device created' do
         let(:api_key) { 'foobar' }
@@ -35,21 +37,20 @@ describe 'Devices API' do
   end
 
   path '/api/v1/devices/{id}' do
-
     get 'Retrieves a device' do
       tags 'Devices'
       produces 'application/json'
-      parameter name: :id, :in => :path, :type => :string
-      security [ api_key: [] ]
+      parameter name: :id, in: :path, type: :string
+      security [api_key: []]
 
       response '200', 'name found' do
         schema type: :object,
-          properties: {
-            id: { type: :integer, }
-          },
-          required: [ 'id' ]
+               properties: {
+                 id: { type: :integer }
+               },
+               required: ['id']
 
-        let(:id) { Device.create(serial_number: 'foo').id }
+        let(:id) { Device.create!(serial_number: 'foo').id }
         run_test!
       end
 

@@ -1,5 +1,6 @@
-class Api::V1::ReadingsController < ActionController::API
+# frozen_string_literal: true
 
+class Api::V1::ReadingsController < ActionController::API
   include Api::Rescuable
   include Api::Authenticatable
 
@@ -9,7 +10,7 @@ class Api::V1::ReadingsController < ActionController::API
     @device_reading = DeviceReading.new(reading_params)
 
     if @device_reading.save!
-      render :show, status: :created, location: api_v1_reading_url(@device_reading, format: :json)
+      render(:show, status: :created, location: api_v1_reading_url(@device_reading, format: :json))
     end
   end
 
@@ -25,5 +26,4 @@ class Api::V1::ReadingsController < ActionController::API
       :reading_at
     )
   end
-
 end

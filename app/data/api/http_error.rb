@@ -1,5 +1,6 @@
-class Api::HttpError
+# frozen_string_literal: true
 
+class Api::HttpError
   attr_accessor :status
   attr_accessor :message
   attr_accessor :code
@@ -21,5 +22,4 @@ class Api::HttpError
       message: @message
     }
   end
-
 end

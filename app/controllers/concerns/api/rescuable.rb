@@ -1,6 +1,7 @@
+# frozen_string_literal: true
+
 # API Authentication controller module
 module Api::Rescuable
-
   extend ActiveSupport::Concern
 
   class InvalidToken < StandardError; end
@@ -13,8 +14,8 @@ module Api::Rescuable
     rescue_from ActiveModel::ForbiddenAttributesError, with: :unprocessable_entity
 
     if ENV['API_DEBUG'] == 'true'
-      rescue_from NoMethodError, with: :internal_server_error
-      rescue_from StandardError, with: :internal_server_error
+      rescue_from(NoMethodError, with: :internal_server_error)
+      rescue_from(StandardError, with: :internal_server_error)
     end
 
     def invalid_token
@@ -60,5 +61,4 @@ module Api::Rescuable
     end
   end
   # rubocop:enable Metrics/BlockLength
-
 end
