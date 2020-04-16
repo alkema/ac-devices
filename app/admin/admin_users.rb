@@ -25,4 +25,29 @@ ActiveAdmin.register AdminUser do
     f.actions
   end
 
+  action_item :invitation do
+    link_to 'Invite Admin User', invitation_admin_admin_users_path
+  end
+
+  collection_action :invitation do
+    @invitation = Invitation.new
+  end
+
+  collection_action :invite, method: :post do
+    @invitation = Invitation.new(params.require(:invitation).permit(:email))
+
+    if @invitation.valid?
+      flash[:notice] = "Invitation sent to #{@invitation.email}"
+
+      AdminUser.invite!(email: @invitation.email)
+
+      redirect_to admin_admin_users_path
+    else
+      flash[:error] = "Please enter valid email"
+
+      redirect_to invitation_admin_admin_users_path
+    end
+
+  end
+
 end

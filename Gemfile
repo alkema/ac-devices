@@ -11,8 +11,10 @@ gem 'pg'
 # Use Puma as the app server
 gem 'puma', '~> 4.1'
 gem 'activeadmin'
+gem 'admin_invitable'
 # Plus integrations with:
 gem 'devise'
+gem 'devise_invitable'
 gem 'groupdate'
 # Use SCSS for stylesheets
 gem 'rswag-api'
