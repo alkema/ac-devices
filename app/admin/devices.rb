@@ -12,26 +12,31 @@ ActiveAdmin.register Device do
       row :serial_number
       row :firmware_version
       row :registered_on
-      row 'current temperature' do
-        device_reading.temperature
+      row 'readings count' do
+        device.device_readings.count
       end
-      row 'current humidity' do
-        device_reading.humidity
-      end
-      row 'current carbon monoxide' do
-        device_reading.carbon_monoxide
-      end
-      row 'current health status' do
-        device_reading.health_status
+      if device_reading
+        row 'current temperature' do
+          device_reading.temperature
+        end
+        row 'current humidity' do
+          device_reading.humidity
+        end
+        row 'current carbon monoxide' do
+          device_reading.carbon_monoxide
+        end
+        row 'current health status' do
+          device_reading.health_status
+        end
       end
     end
   end
 
-  action_item :show do
+  action_item :show, except: [ :index, :new ] do
     link_to "#{device.serial_number} Details", admin_device_path(device)
   end
 
-  action_item :this_week do
+  action_item :this_week, except: [ :index, :new ] do
     link_to 'This Week', this_week_admin_device_path(device)
   end
 
@@ -40,7 +45,7 @@ ActiveAdmin.register Device do
     @device_readings = @device.device_readings.this_week
   end
 
-  action_item :this_month do
+  action_item :this_month, except: [ :index, :new ] do
     link_to 'This Month', this_month_admin_device_path(device)
   end
 
@@ -49,7 +54,7 @@ ActiveAdmin.register Device do
     @device_readings = @device.device_readings.this_month
   end
 
-  action_item :this_year do
+  action_item :this_year, except: [ :index, :new ] do
     link_to 'This Year', this_year_admin_device_path(device)
   end
 
