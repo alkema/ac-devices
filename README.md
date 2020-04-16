@@ -1,24 +1,55 @@
-# README
+# AC Hub
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+### Ruby version
 
-Things you may want to cover:
+```
+6.0.2.2
+```
 
-* Ruby version
+### Ruby version
 
-* System dependencies
+```
+2.6.5
+```
 
-* Configuration
+### Setup
 
-* Database creation
+```
+bundle
+```
 
-* Database initialization
+### Database creation
 
-* How to run the test suite
+```
+rake db:create
+```
 
-* Services (job queues, cache servers, search engines, etc.)
+### Database seeds (fake data)
 
-* Deployment instructions
+```
+rake db:seed
+```
 
-* ...
+### Test suite
+
+```
+rspec
+```
+
+### Generate API docs
+
+```
+rake rswag:specs:swaggerize PATTERN="api/**/*_spec.rb"
+```
+
+### Deployment setup
+
+```
+git remote add heroku git@github.com:alkema/ac-devices.git
+```
+
+### Deployment
+
+```
+git push heroku  master
+```
