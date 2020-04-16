@@ -27,11 +27,11 @@ ActiveAdmin.register Device do
     end
   end
 
-  action_item :show, only: [:this_week, :this_month, :this_year] do
+  action_item :show do
     link_to "#{device.serial_number} Details", admin_device_path(device)
   end
 
-  action_item :this_week, only: [:show, :this_month, :this_year] do
+  action_item :this_week do
     link_to 'This Week', this_week_admin_device_path(device)
   end
 
@@ -40,7 +40,7 @@ ActiveAdmin.register Device do
     @device_readings = @device.device_readings.this_week
   end
 
-  action_item :this_month, only: [:show, :this_week, :this_year] do
+  action_item :this_month do
     link_to 'This Month', this_month_admin_device_path(device)
   end
 
@@ -49,7 +49,7 @@ ActiveAdmin.register Device do
     @device_readings = @device.device_readings.this_month
   end
 
-  action_item :this_year, only: [:show, :this_week, :this_month] do
+  action_item :this_year do
     link_to 'This Year', this_year_admin_device_path(device)
   end
 
