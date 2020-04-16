@@ -1,0 +1,5 @@
+<div>
+
+<%= area_chart @device.device_readings.group_by_hour(:reading_at).average(:temperature) %>
+
+</div>

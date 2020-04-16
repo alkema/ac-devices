@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_13_213433) do
+ActiveRecord::Schema.define(version: 2020_04_15_044304) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,8 +37,34 @@ ActiveRecord::Schema.define(version: 2020_04_13_213433) do
     t.datetime "remember_created_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "api_auth_token"
+    t.index ["api_auth_token"], name: "index_admin_users_on_api_auth_token", unique: true
     t.index ["email"], name: "index_admin_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
+  end
+
+  create_table "device_readings", force: :cascade do |t|
+    t.bigint "device_id"
+    t.decimal "temperature", precision: 3, scale: 1
+    t.decimal "humidity", precision: 5, scale: 2
+    t.integer "carbon_monoxide"
+    t.string "health_status"
+    t.datetime "reading_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["device_id", "carbon_monoxide"], name: "index_device_readings_on_device_id_and_carbon_monoxide"
+    t.index ["device_id", "health_status"], name: "index_device_readings_on_device_id_and_health_status"
+    t.index ["device_id", "humidity"], name: "index_device_readings_on_device_id_and_humidity"
+    t.index ["device_id", "temperature"], name: "index_device_readings_on_device_id_and_temperature"
+    t.index ["device_id"], name: "index_device_readings_on_device_id"
+  end
+
+  create_table "devices", force: :cascade do |t|
+    t.string "serial_number"
+    t.string "firmware_version"
+    t.date "registered_on"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
 end
