@@ -18,7 +18,6 @@ RSpec.describe Api::V1::DevicesController, type: :routing do
       expect(get: "/api/v1/devices/1/edit").to route_to("api/v1/devices#edit", id: "1")
     end
 
-
     it "routes to #create" do
       expect(post: "/api/v1/devices").to route_to("api/v1/devices#create")
     end
