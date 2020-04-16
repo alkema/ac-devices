@@ -12,7 +12,7 @@ module Api::Rescuable
     rescue_from ActiveRecord::RecordInvalid, with: :unprocessable_entity
     rescue_from ActiveModel::ForbiddenAttributesError, with: :unprocessable_entity
 
-    if ENV['API_DEBUG'] == 'true'
+    if ENV['API_DEBUG'] == 'false'
       rescue_from NoMethodError, with: :internal_server_error
       rescue_from StandardError, with: :internal_server_error
     end

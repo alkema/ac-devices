@@ -23,18 +23,15 @@ RSpec.configure do |config|
       },
       paths: {},
       servers: [
-        {
-          url: 'https://{defaultHost}',
-          variables: {
-            defaultHost: {
-              default: 'ac-devices.herokuapp.com'
-            }
-          },
-          description: 'Production server (uses live data)'
-        },
-        {
-          host: 'localhost:3000',
-          description: 'Local server (for development)'
+        url: '{url}',
+        variables: {
+          url: {
+            enum: [
+              'https://ac.alkema.ca',
+              'http://localhost:3000'
+            ],
+            default: 'https://ac.alkema.ca'
+          }
         }
       ],
       components: {

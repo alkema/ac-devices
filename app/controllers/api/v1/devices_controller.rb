@@ -26,9 +26,12 @@ class Api::V1::DevicesController < ActionController::API
     @device = Device.find(params[:id])
   end
 
-  # Only allow a list of trusted parameters through.
   def device_params
-    params.fetch(:api_v1_device, {})
+    params.require(:device).permit(
+      :serial_number,
+      :firmware_version,
+      :registered_on
+    )
   end
 
 end

@@ -178,17 +178,16 @@
   },
   "servers": [
     {
-      "url": "https://{defaultHost}",
+      "url": "{url}",
       "variables": {
-        "defaultHost": {
-          "default": "ac-devices.herokuapp.com"
+        "url": {
+          "enum": [
+            "https://ac.alkema.ca",
+            "http://localhost:3000"
+          ],
+          "default": "https://ac.alkema.ca"
         }
-      },
-      "description": "Production server (uses live data)"
-    },
-    {
-      "host": "localhost:3000",
-      "description": "Local server (for development)"
+      }
     }
   ],
   "components": {
