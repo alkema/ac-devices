@@ -17,6 +17,7 @@ gem 'devise'
 gem 'devise_invitable'
 gem 'groupdate'
 # Use SCSS for stylesheets
+gem 'rollbar'
 gem 'rswag-api'
 gem 'rswag-ui'
 gem 'sass-rails', '>= 6'
