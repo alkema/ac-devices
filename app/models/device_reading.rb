@@ -6,7 +6,8 @@
 class DeviceReading < ApplicationRecord
 
   belongs_to :device
-
+  has_many :notifications
+  
   scope :this_week, -> { where('extract(week from reading_at) = ?', Date.current.cweek) }
 
   scope :this_month, -> { where('extract(month from reading_at) = ?', Date.current.month) }

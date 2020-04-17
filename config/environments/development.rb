@@ -8,7 +8,9 @@ Rails.application.configure do
 
   # Do not eager load code on boot.
   config.eager_load = false
-  config.eager_load_paths += ["#{Rails.root}/app/services", "#{Rails.root}/app/data"]
+  config.eager_load_paths += [
+    "#{Rails.root}/app/services", "#{Rails.root}/app/data", "#{Rails.root}/app/lib"
+  ]
 
   # Show full error reports.
   config.consider_all_requests_local = true

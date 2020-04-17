@@ -6,9 +6,7 @@ class Api::V1::ReadingsController < ActionController::API
   # POST /api/v1/readings
   # POST /api/v1/readings.json
   def create
-    @device_reading = DeviceReading.new(reading_params)
-
-    if @device_reading.save!
+    if @device_reading = DeviceReadings::Create.call(reading_params)
       render :show, status: :created, location: api_v1_reading_url(@device_reading, format: :json)
     end
   end
