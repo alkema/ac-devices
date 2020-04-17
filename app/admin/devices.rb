@@ -1,6 +1,6 @@
 ActiveAdmin.register Device do
 
-  actions :index, :show, :create, :edit, :update
+  actions :index, :show, :create, :edit, :update, :new
 
   preserve_default_filters!
   remove_filter :device_readings
