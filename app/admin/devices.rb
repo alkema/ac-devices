@@ -1,10 +1,11 @@
 ActiveAdmin.register Device do
 
-  permit_params :serial_number, :firmware_version, :registered_on
+  actions :index, :show, :create, :edit, :update
 
-  show do
-    render 'charts', { device: device }
-  end
+  preserve_default_filters!
+  remove_filter :device_readings
+
+  permit_params :serial_number, :firmware_version, :registered_on
 
   sidebar "Details",  only: [:show, :this_week, :this_month, :this_year] do
     attributes_table_for device do
@@ -32,8 +33,14 @@ ActiveAdmin.register Device do
     end
   end
 
-  action_item :show, except: [ :index, :new ] do
-    link_to "#{device.serial_number} Details", admin_device_path(device)
+  controller do
+    def show
+      @device_readings = resource.device_readings
+    end
+  end
+
+  action_item :today, except: [ :index, :new ] do
+    link_to 'Today', admin_device_device_readings_path(device)
   end
 
   action_item :this_week, except: [ :index, :new ] do
