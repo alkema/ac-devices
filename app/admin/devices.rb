@@ -40,7 +40,7 @@ ActiveAdmin.register Device do
   end
 
   action_item :today, except: [ :index, :new ] do
-    link_to 'Today', admin_device_device_readings_path(device)
+    link_to 'Today (+ historical)', admin_device_device_readings_path(device)
   end
 
   action_item :this_week, except: [ :index, :new ] do

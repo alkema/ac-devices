@@ -14,14 +14,17 @@ ActiveAdmin.register_page "Dashboard" do
               li link_to(link_title, admin_notification_path(notification))
             end
           end
+          div do
+            pie_chart Notification.unresolved.group(:warning_type).count
+          end
         end
       end
 
-    #   column do
-    #     panel "Info" do
-    #       para "Welcome to ActiveAdmin."
-    #     end
-    #   end
+    column do
+      panel "All Notifications" do
+        pie_chart Notification.all.group(:warning_type).count
+      end
+    end
     end
   end # content
 end
